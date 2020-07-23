@@ -99,7 +99,7 @@ WebsocketRelayClient.prototype._onSocketMessage = function( message ) {
                 this._websocket.send( jsonStringOut );
             }
         }
-    	console.log(jsonString);
+    	// console.log(jsonString);
     }
 };
 
