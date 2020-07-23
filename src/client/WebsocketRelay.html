@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<title>repro3453</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	</head>
+
+	<style>
+	</style>
+	
+	<body>
+		<b>How to freeze websocket receiving</b>
+		<div>Open first client with default settings, press button</div>
+		<div>Open second client (preferably on a different computer), change num local players to 0, then increase render cost until moving mouse causes freeze (it happens to me at cost=25ish on MBP2019, and 13 on an MBP2012)</div>
+		</br>
+		<b>How to freeze websocket sending</b>
+		<div>Open first client with default settings, press button</div>
+		<div>Open second client (preferably on a different computer), change num local players to 0</div>
+		<div>Back to first client (the sender), set player cost to 1</div>
+		<div>Now increase number of local players until moving the mouse on the sender freezes things on the receiver (for me it happens at around 80 players on MBP2019 and 45 on MBP2012).</div>
+		</br>
+		<button id="startButton" style="margin-right:10px">Move local players</button>
+		num local players&nbsp;<input id="numPlayersNumberBox" type='number' style="width:50px;margin-right:10px" value=4></input>
+		player render cost&nbsp;<input id="renderWasteNumberBox" type='number' style="width:50px;margin-right:10px" value=0></input>		
+		</br>
+		</br>
+		<canvas id="theCanvas"  width="800px" height="600px" style="border:1px solid black"/>
+	</body>
+
+	<script src="WebsocketRelayClient.js"></script> 
+	<script src="Game.js"></script> 
+
+	<script>
+		'use strict';
+		var canvas = document.getElementById('theCanvas');
+		var renderWasteNumberBox = document.getElementById('renderWasteNumberBox');
+		var numPlayersNumberBox = document.getElementById('numPlayersNumberBox');
+
+		var numLocalPlayers = parseInt(numPlayersNumberBox.value);
+
+		var game = new Game(canvas, numLocalPlayers);
+		var update = function () {
+			game.update();
+			game.render();
+			window.requestAnimationFrame(update);
+		}
+		window.requestAnimationFrame(update);
+
+		var waste = parseInt(renderWasteNumberBox.value);
+		game.numWasteRenderPasses = waste;
+
+		var startButton = document.getElementById('startButton');
+		startButton.onclick = function(event) {
+			game.moveLocalPlayers = !game.moveLocalPlayers;
+		}
+
+		renderWasteNumberBox.onchange = function(event) {
+			game.numWasteRenderPasses = parseInt(event.target.value);
+		}
+
+		numPlayersNumberBox.onchange = function(event) {
+			var n = parseInt(event.target.value);
+			game.setNumLocalPlayers(n); 
+		}
+		
+
+	</script>
+</html>

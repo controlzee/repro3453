@@ -1,0 +1,10 @@
+{
+  "name": "repro3453",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jacques Menuet <jacques@controlzee.com>",
+  "license": "MIT",
+  "dependencies": {
+    "websocket": "^1.0.31"
+  }
+}
