@@ -8,3 +8,5 @@ node src/server/WebsocketRelayServer.js
 ```
 # Run
 Open a Chrome84 tab on http://localhost:9898/
+
+Follow instructions on the page 
