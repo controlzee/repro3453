@@ -26,8 +26,9 @@
 		<canvas id="theCanvas"  width="800px" height="600px" style="border:1px solid black"/>
 	</body>
 
-	<script src="WebsocketRelayClient.js"></script> 
 	<script src="Game.js"></script> 
+	<script src="WebsocketRelayClient.js"></script> 
+	<script src="Worker.js"></script> 
 
 	<script>
 		'use strict';
@@ -37,10 +38,14 @@
 
 		var numLocalPlayers = parseInt(numPlayersNumberBox.value);
 
+		var frameNumber = 0;
 		var game = new Game(canvas, numLocalPlayers);
 		var update = function () {
-			game.update();
-			game.render();
+			frameNumber++;
+			// if ( frameNumber % 4!==0 ) {
+				game.update();
+				game.render();
+			// }
 			window.requestAnimationFrame(update);
 		}
 		window.requestAnimationFrame(update);
@@ -61,7 +66,5 @@
 			var n = parseInt(event.target.value);
 			game.setNumLocalPlayers(n); 
 		}
-		
-
 	</script>
 </html>

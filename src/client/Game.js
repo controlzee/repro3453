@@ -35,7 +35,7 @@ Player.prototype.fromJson = function(data) {
 */
 function Game(canvas, numLocalPlayers) {
     this.canvas = canvas;
-    this.websocketRelayClient = new WebsocketRelayClient();
+    this.websocketRelayClient = new WebsocketRelayClientInWebWorker();
     this.websocketRelayClient.onTextMessageReceived = this.onTextMessageReceived.bind(this);
 
     this.numWasteRenderPasses = 1;
