@@ -47,6 +47,8 @@ function Game(canvas, numLocalPlayers) {
 
     this.receivedMessages = [];
 
+    this.fps = null;
+
     this._setNumLocalPlayers(numLocalPlayers);
 }
 
@@ -124,6 +126,18 @@ Game.prototype.render = function() {
     for ( var id in this.remotePlayers ) {
         var player = this.remotePlayers[id];
         this.renderPlayer(player);
+    }
+
+    if ( this.fps!==null ) {
+        var fontSize = 18;
+        context.font = fontSize + 'px Verdana';
+        // var text = player.handle;
+        // var textWidth = context.measureText(text).width;
+        // var tx = x - textWidth / 2;
+        // var ty = y - radius * 1.15;
+        context.strokeStyle = '#000000';
+        context.fillStyle = '#000000';
+        context.fillText("FPS:" + Math.floor(this.fps), 10, 30);
     }
 };
 
