@@ -62,9 +62,10 @@
 
 			game.update();
 			game.render();
-			window.requestAnimationFrame(update);
+			// window.requestAnimationFrame(update);
 		}
-		window.requestAnimationFrame(update);
+		// window.requestAnimationFrame(update);
+		setInterval(update, 17);
 
 		var waste = parseInt(renderWasteNumberBox.value);
 		game.numWasteRenderPasses = waste;
